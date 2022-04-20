@@ -1,0 +1,645 @@
+{
+  "jsonVersion": "1.0",
+  "version": "1.0.0-rc.1",
+  "extent": {
+    "xmin": 121.34186303347371,
+    "ymin": 31.158450675379044,
+    "xmax": 121.60863052751836,
+    "ymax": 31.338592910233814
+  },
+  "options": {
+    "spatialReference": {},
+    "lights": {
+      "directional": {
+        "direction": [
+          1,
+          0,
+          -1
+        ],
+        "color": [
+          1,
+          1,
+          1
+        ]
+      },
+      "ambient": {
+        "resource": {
+          "url": "./res/temp-resources/hdr/8b8/8b81d106-c0a2-4055-af0f-aa0b35c2b944/pink_sunrise_1k.hdr",
+          "sh": [
+            0.33359423742434957,
+            0.25423501874017973,
+            0.37945873291041843,
+            0.10713584179663649,
+            0.07295495797178504,
+            0.06727190553311613,
+            0.1075798785742291,
+            0.07673646739071649,
+            0.09206390851433185,
+            -0.03864883621602728,
+            -0.028624708682482465,
+            -0.027417446584638606,
+            -0.044902493972875795,
+            -0.027427372787626976,
+            -0.028685647400017947,
+            -0.022637706599687057,
+            -0.017101525923696313,
+            -0.021865693733989725,
+            0.049331965384526055,
+            0.034594938245920775,
+            0.034896587118889086,
+            -0.09144117396376923,
+            -0.06330954527506094,
+            -0.03875689493685958,
+            0.02576009479072308,
+            0.022668265481442382,
+            0.024981606576939933
+          ]
+        },
+        "exposure": 1,
+        "hsv": [
+          0,
+          0.234,
+          0
+        ],
+        "orientation": 0
+      }
+    },
+    "seamlessZoom": true,
+    "zoomable": true,
+    "draggable": true,
+    "renderable": true,
+    "center": {
+      "x": 121.497803,
+      "y": 31.241572
+    },
+    "zoom": 14,
+    "bearing":0,
+    "pitch": 40
+  },
+  "layers": [
+    {
+      "type": "GroupGLLayer",
+      "id": "group",
+      "layers": [
+        {
+          "type": "GeoJSONVectorTileLayer",
+          "id": "building",
+          "options": {
+            "data": "",
+            "spatialReference": null,
+            "style": {
+              "style": [
+                {
+                  "filter": true,
+                  "renderPlugin": {
+                    "type": "lit",
+                    "dataConfig": {
+                      "type": "3d-extrusion",
+                      "uv": true,
+                      "tangent": true,
+                      "altitudeProperty": "HEIGHT",
+                      "minHeightProperty": "null",
+                      "altitudeScale": 1,
+                      "defaultAltitude": 10,
+                      "topThickness": 0,
+                      "top": true,
+                      "side": false
+                    },
+                    "sceneConfig": {}
+                  },
+                  "symbol": {
+                    "bloom": false,
+                    "ssr": false,
+                    "polygonOpacity": 1,
+                    "material": {
+                      "baseColorTexture": null,
+                      "baseColorFactor": [
+                        0.3411764705882353,
+                        0.33725490196078434,
+                        0.36470588235294116,
+                        1
+                      ],
+                      "hsv": [
+                        0.02,
+                        -0.43,
+                        -0.25
+                      ],
+                      "baseColorIntensity": 1,
+                      "contrast": 1.851,
+                      "outputSRGB": 1,
+                      "metallicRoughnessTexture": null,
+                      "roughnessFactor": 0,
+                      "metallicFactor": 0.93,
+                      "normalTexture": null,
+                      "uvScale": [
+                        0.05,
+                        0.05
+                      ],
+                      "uvOffset": [
+                        0,
+                        0
+                      ],
+                      "uvRotation": 0,
+                      "normalMapFactor": 0.27,
+                      "normalMapFlipY": 0,
+                      "bumpTexture": null,
+                      "bumpScale": 0.02,
+                      "clearCoatThickness": 5,
+                      "clearCoatFactor": 0,
+                      "clearCoatIor": 1.4,
+                      "clearCoatRoughnessFactor": 0.04,
+                      "occlusionTexture": null,
+                      "emissiveTexture": "./res/temp-resources/material/bda/bdaa44f0-b658-400b-9a78-d61c4531fab5/28176-21464.jpg",
+                      "emissiveFactor": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "emitColorFactor": 0.69,
+                      "emitMultiplicative": 0,
+                      "albedoPBRFactor": 2.18,
+                      "outputLinear": 0,
+                      "clearCoatF0": 0.04,
+                      "emitColor": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "polygonOpacity": 0.91
+                    },
+                    "visible": true
+                  }
+                },
+                {
+                  "filter": true,
+                  "renderPlugin": {
+                    "type": "lit",
+                    "dataConfig": {
+                      "type": "3d-extrusion",
+                      "uv": true,
+                      "tangent": true,
+                      "altitudeProperty": "HEIGHT",
+                      "minHeightProperty": "null",
+                      "altitudeScale": 1,
+                      "defaultAltitude": 10,
+                      "topThickness": 0,
+                      "top": false,
+                      "side": true
+                    },
+                    "sceneConfig": {}
+                  },
+                  "symbol": {
+                    "bloom": true,
+                    "ssr": false,
+                    "polygonOpacity": 1,
+                    "material": {
+                      "baseColorTexture": "./res/temp-resources/material/749/7496e280-b3e1-4773-9acb-af91e9df45f5/22823-27004.jpg",
+                      "baseColorFactor": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      "hsv": [
+                        0,
+                        0,
+                        0.36
+                      ],
+                      "baseColorIntensity": 1,
+                      "contrast": 1.32,
+                      "outputSRGB": 1,
+                      "metallicRoughnessTexture": "./res/temp-resources/material/749/7496e280-b3e1-4773-9acb-af91e9df45f5/metallicRoughness.png",
+                      "roughnessFactor": 0.4,
+                      "metallicFactor": 0,
+                      "normalTexture": "./res/temp-resources/material/749/7496e280-b3e1-4773-9acb-af91e9df45f5/normal.png",
+                      "uvScale": [
+                        0.1666666666666667,
+                        0.26
+                      ],
+                      "uvOffset": [
+                        0,
+                        0
+                      ],
+                      "uvRotation": 0,
+                      "normalMapFactor": 1.73,
+                      "normalMapFlipY": 0,
+                      "bumpTexture": null,
+                      "bumpScale": 0.02,
+                      "clearCoatThickness": 5,
+                      "clearCoatFactor": 0,
+                      "clearCoatIor": 1.4,
+                      "clearCoatRoughnessFactor": 0.04,
+                      "occlusionTexture": null,
+                      "emissiveTexture": null,
+                      "emissiveFactor": [
+                        0.011764705882352941,
+                        0.011764705882352941,
+                        0.011764705882352941
+                      ],
+                      "emitColorFactor": 0.8,
+                      "emitMultiplicative": 0,
+                      "albedoPBRFactor": 1.59,
+                      "outputLinear": 0,
+                      "clearCoatF0": 0.04,
+                      "polygonOpacity": 1
+                    },
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "zIndex": 1,
+            "visible": true
+          }
+        },
+        {
+          "type": "GeoJSONVectorTileLayer",
+          "id": "road",
+          "options": {
+            "data": "",
+            "spatialReference": null,
+            "style": {
+              "style": [
+                {
+                  "filter": true,
+                  "renderPlugin": {
+                    "dataConfig": {
+                      "type": "line"
+                    },
+                    "sceneConfig": {},
+                    "type": "line"
+                  },
+                  "symbol": {
+                    "lineBloom": true,
+                    "lineCap": "butt",
+                    "lineColor": [
+                      1,
+                      0.7450980392156863,
+                      0.49019607843137253,
+                      1
+                    ],
+                    "lineDasharray": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "lineDashColor": [
+                      1,
+                      1,
+                      1,
+                      0
+                    ],
+                    "lineDx": 0,
+                    "lineDy": 0,
+                    "lineGapWidth": 0,
+                    "lineJoin": "miter",
+                    "lineOpacity": 0.89,
+                    "linePatternAnimSpeed": 0,
+                    "linePatternFile": null,
+                    "lineJoinPatternMode": 0,
+                    "lineWidth": 2,
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "zIndex": 2,
+            "visible": true
+          }
+        },
+        {
+          "type": "GeoJSONVectorTileLayer",
+          "id": "animateRoad",
+          "options": {
+            "data": "",
+            "spatialReference": null,
+            "style": {
+              "style": [
+                {
+                  "filter": true,
+                  "renderPlugin": {
+                    "dataConfig": {
+                      "type": "line"
+                    },
+                    "sceneConfig": {},
+                    "type": "line"
+                  },
+                  "symbol": {
+                    "lineBloom": true,
+                    "lineCap": "butt",
+                    "lineColor": [
+                      0.73,
+                      0.73,
+                      0.73,
+                      1
+                    ],
+                    "lineDasharray": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "lineDashColor": [
+                      1,
+                      1,
+                      1,
+                      0
+                    ],
+                    "lineDx": 0,
+                    "lineDy": 0,
+                    "lineGapWidth": 0,
+                    "lineJoin": "miter",
+                    "lineOpacity": 1,
+                    "linePatternAnimSpeed": 0,
+                    "linePatternFile": "./res/temp-resources/line-pattern/4d5/4d5f0c7b-096b-4b38-8bce-7e386c45c441/default.webp",
+                    "lineJoinPatternMode": 1,
+                    "lineWidth": 33.6,
+                    "linePatternGap": 16.6,
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "zIndex": 2,
+            "visible": true
+          }
+        },
+        {
+          "type": "GeoJSONVectorTileLayer",
+          "id": "water",
+          "options": {
+            "data": "",
+            "spatialReference": null,
+            "style": {
+              "style": [
+                {
+                  "filter": true,
+                  "renderPlugin": {
+                    "type": "lit",
+                    "dataConfig": {
+                      "type": "3d-extrusion",
+                      "uv": true,
+                      "tangent": true,
+                      "altitudeProperty": "HEIGHT",
+                      "minHeightProperty": "null",
+                      "altitudeScale": 1,
+                      "defaultAltitude": 0,
+                      "topThickness": 0,
+                      "top": true,
+                      "side": true
+                    },
+                    "sceneConfig": {}
+                  },
+                  "symbol": {
+                    "bloom": false,
+                    "ssr": true,
+                    "polygonOpacity": 1,
+                    "material": {
+                      "baseColorTexture": "./res/temp-resources/material/849/84936dee-b869-4c01-9a89-f2d00622b825/BaseColor7.png",
+                      "baseColorFactor": [
+                        0.023529411764705882,
+                        0.023529411764705882,
+                        0.027450980392156862,
+                        1
+                      ],
+                      "hsv": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "baseColorIntensity": 1,
+                      "contrast": 1,
+                      "outputSRGB": 1,
+                      "metallicRoughnessTexture": "./res/temp-resources/material/849/84936dee-b869-4c01-9a89-f2d00622b825/Metallic_Roughness7.png",
+                      "roughnessFactor": 0,
+                      "metallicFactor": 1,
+                      "normalTexture": "./res/temp-resources/material/849/84936dee-b869-4c01-9a89-f2d00622b825/Normal7.png",
+                      "uvScale": [
+                        13.5,
+                        13.5
+                      ],
+                      "uvOffset": [
+                        0,
+                        0
+                      ],
+                      "uvRotation": 0,
+                      "normalMapFactor": 0.59,
+                      "normalMapFlipY": 0,
+                      "bumpTexture": "./res/temp-resources/material/849/84936dee-b869-4c01-9a89-f2d00622b825/Height7.png",
+                      "bumpScale": 0.02,
+                      "clearCoatThickness": 5,
+                      "clearCoatFactor": 0,
+                      "clearCoatIor": 1.4,
+                      "clearCoatRoughnessFactor": 0.04,
+                      "occlusionTexture": null,
+                      "emissiveTexture": null,
+                      "emissiveFactor": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "emitColorFactor": 1,
+                      "emitMultiplicative": 0,
+                      "albedoPBRFactor": 1,
+                      "outputLinear": 0,
+                      "clearCoatF0": 0.04,
+                      "polygonOpacity": 1
+                    },
+                    "visible": true
+                  }
+                },
+                {
+                  "filter": true,
+                  "renderPlugin": {
+                    "dataConfig": {
+                      "type": "line"
+                    },
+                    "sceneConfig": {},
+                    "type": "line"
+                  },
+                  "symbol": {
+                    "lineBloom": false,
+                    "lineCap": "butt",
+                    "lineColor": [
+                      0.73,
+                      0.73,
+                      0.73,
+                      1
+                    ],
+                    "lineDasharray": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "lineDashColor": [
+                      1,
+                      1,
+                      1,
+                      0
+                    ],
+                    "lineDx": 0,
+                    "lineDy": 0,
+                    "lineGapWidth": 0,
+                    "lineJoin": "miter",
+                    "lineOpacity": 1,
+                    "linePatternAnimSpeed": 0,
+                    "linePatternFile": null,
+                    "lineStrokeWidth": 0,
+                    "lineStrokeColor": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "lineJoinPatternMode": 0,
+                    "lineWidth": 2,
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "zIndex": 3,
+            "visible": true
+          }
+        }
+      ],
+      "options": {
+        "sceneConfig": {
+          "environment": {
+            "enable": true,
+            "mode": 0,
+            "level": 0,
+            "brightness": 0
+          },
+          "shadow": {
+            "type": "esm",
+            "enable": true,
+            "quality": "high",
+            "opacity": 0.5,
+            "color": [
+              0,
+              0,
+              0
+            ],
+            "blurOffset": 1
+          },
+          "postProcess": {
+            "enable": true,
+            "antialias": {
+              "enable": true,
+              "taa": true,
+              "jitterRatio": 0.25
+            },
+            "ssr": {
+              "enable": true
+            },
+            "bloom": {
+              "enable": true,
+              "threshold": 0.65,
+              "factor": 0.7,
+              "radius": 0.073
+            },
+            "ssao": {
+              "enable": true,
+              "bias": 0.08,
+              "radius": 0.08,
+              "intensity": 1.5
+            },
+            "sharpen": {
+              "enable": false,
+              "factor": 0.2
+            },
+            "outline": {
+              "enable": true,
+              "outlineFactor": 0.3,
+              "highlightFactor": 0.2,
+              "outlineWidth": 1,
+              "outlineColor": [
+                1,
+                1,
+                0
+              ]
+            }
+          },
+          "ground": {
+            "enable": true,
+            "renderPlugin": {
+              "type": "lit"
+            },
+            "symbol": {
+              "polygonFill": [
+                0.54,
+                0.54,
+                0.54,
+                1
+              ],
+              "polygonOpacity": 1,
+              "ssr": false,
+              "material": {
+                "baseColorTexture": "./res/temp-resources/material/a13/a137cd68-18cb-4125-a2a0-fe270c4a13bc/BaseColor14.png",
+                "baseColorFactor": [
+                  0,
+                  0,
+                  0,
+                  1
+                ],
+                "hsv": [
+                  0,
+                  -0.13,
+                  0.22
+                ],
+                "baseColorIntensity": 1,
+                "contrast": 1.63,
+                "outputSRGB": 1,
+                "metallicRoughnessTexture": "./res/temp-resources/material/a13/a137cd68-18cb-4125-a2a0-fe270c4a13bc/Metallic_Roughness14.png",
+                "roughnessFactor": 0,
+                "metallicFactor": 0.6,
+                "normalTexture": "./res/temp-resources/material/a13/a137cd68-18cb-4125-a2a0-fe270c4a13bc/Normal14.png",
+                "uvScale": [
+                  3.1249999999999987,
+                  2.5
+                ],
+                "uvOffset": [
+                  0,
+                  0
+                ],
+                "uvRotation": 0,
+                "normalMapFactor": 1,
+                "normalMapFlipY": 0,
+                "clearCoatThickness": 5,
+                "clearCoatFactor": 1,
+                "clearCoatIor": 1.4,
+                "clearCoatRoughnessFactor": 0.04,
+                "occlusionTexture": null,
+                "emissiveTexture": null,
+                "emissiveFactor": [
+                  0,
+                  0,
+                  0
+                ],
+                "emitColorFactor": 0,
+                "emitMultiplicative": 0,
+                "albedoPBRFactor": 3.24,
+                "outputLinear": 0,
+                "clearCoatF0": 0.04,
+                "bumpTexture": "./res/temp-resources/material/a13/a137cd68-18cb-4125-a2a0-fe270c4a13bc/Height14.png",
+                "bumpScale": 0,
+                "emitColor": [
+                  1,
+                  1,
+                  1
+                ],
+                "polygonOpacity": 1
+              }
+            },
+            "extras": {
+              "currentMaterial": ""
+            }
+          }
+        }
+      }
+    }
+  ]
+}

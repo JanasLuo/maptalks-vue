@@ -1,0 +1,287 @@
+<!--
+ * @Author: janasluo
+ * @Date: 2022-04-07 13:44:42
+ * @LastEditTime: 2022-04-20 20:41:36
+ * @LastEditors: janasluo
+ * @Description: 
+-->
+<!--
+ * @Author: janasluo
+ * @Date: 2022-03-29 16:44:07
+ * @LastEditTime: 2022-04-07 13:40:46
+ * @LastEditors: janasluo
+ * @Description: 
+-->
+<!--
+ * @Author: janasluo
+ * @Date: 2022-03-24 10:37:05
+ * @LastEditTime: 2022-03-28 13:54:38
+ * @LastEditors: janasluo
+ * @Description: 
+-->
+<template>
+  <div id="map" class="container"></div>
+</template>
+
+<script>
+import {createApp,h} from 'vue'
+import * as THREE from 'three';
+import * as maptalks from 'maptalks';
+import { ThreeLayer, BaseObject } from 'maptalks.three';
+
+import Stats from 'three/examples/jsm/libs/stats.module.js';
+import { lineLength, getLinePosition } from './geoutil'
+import "maptalks/dist/maptalks.css";
+
+import { MeshLine, MeshLineMaterial, MeshLineRaycast } from './THREE.MeshLine';
+console.log('Geometry', THREE.Geometry)
+
+export default {
+  name: 'App',
+  mounted() {
+     var map = new maptalks.Map("map", {
+            center: [113.93258, 22.51829],
+            zoom: 15,
+            pitch: 70,
+            bearing: 180,
+            centerCross: true,
+            doubleClickZoom: false,
+            baseLayer: new maptalks.TileLayer('tile', {
+                urlTemplate: 'http://mt0.google.cn/vt/lyrs=m&x={x}&y={y}&z={z}',
+                cssFilter: 'sepia(100%) invert(90%)'
+            })
+        });
+
+        // the ThreeLayer to draw buildings
+        var threeLayer = new ThreeLayer('t', {
+            forceRenderOnMoving: true,
+            forceRenderOnRotating: true,
+            // animation: true
+        });
+        var stats;
+        threeLayer.prepareToDraw = function (gl, scene, camera) {
+            stats = new Stats();
+            stats.domElement.style.zIndex = 100;
+            document.getElementById('map').appendChild(stats.domElement);
+
+            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+            camera.add(new THREE.SpotLight(0xffffff, 0.6, 0, Math.PI));
+
+            loadRoad('/data/nanshan-road1.geojson', './data/nanshan-road1.png');
+            loadRoad('/data/nanshan-road2.geojson', './data/nanshan-road2.png');
+            loadRoad('/data/nanshan-road3.geojson', './data/nanshan-road3.png');
+            animation();
+            // initGui();
+        };
+        threeLayer.addTo(map);
+
+        var meshes = [];
+        function loadRoad(geojsonURL, textureURL) {
+            fetch(geojsonURL).then(function (res) {
+                return res.text();
+            }).then(function (text) {
+                return JSON.parse(text);
+            }).then(function (geojson) {
+                const texture = new THREE.TextureLoader().load(textureURL);
+                texture.anisotropy = 16;
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                const camera = threeLayer.getCamera();
+                const material = new MeshLineMaterial({
+                    map: texture,
+                    useMap: true,
+                    lineWidth: 13,
+                    sizeAttenuation: false,
+                    transparent: true,
+                    near: camera.near,
+                    far: camera.far
+                });
+                const multiLineStrings = maptalks.GeoJSON.toGeometry(geojson);
+                for (const multiLineString of multiLineStrings) {
+                    const lines = multiLineString._geometries.filter(lineString => {
+                        const len = lineLength(lineString);
+                        return len > 800;
+                    }).map(lineString => {
+                        const len = lineLength(lineString)
+                        const line = new ArcLine(lineString, { altitude: 0, height: len / 3, speed: len / 100000 }, material, threeLayer);
+                        line.setToolTip(len);
+                        return line;
+                    });
+                    threeLayer.addMesh(lines);
+                    meshes = meshes.concat(lines);
+                }
+            });
+        }
+
+        function animation() {
+            // layer animation support Skipping frames
+            threeLayer._needsUpdate = !threeLayer._needsUpdate;
+            if (threeLayer._needsUpdate) {
+                threeLayer.redraw();
+            }
+            stats.update();
+            requestAnimationFrame(animation);
+        }
+
+        function initGui() {
+            var params = {
+                add: true,
+                altitude: 0,
+                speed: OPTIONS.speed
+            };
+
+            var gui = new dat.GUI();
+            gui.add(params, 'add').onChange(function () {
+                if (params.add) {
+                    threeLayer.addMesh(meshes);
+                } else {
+                    threeLayer.removeMesh(meshes);
+                }
+            });
+            // gui.add(params, 'speed', 0.001, 0.1, 0.001).onChange(function () {
+            //     meshes.forEach(function (mesh) {
+            //         mesh.options.speed = params.speed;
+            //     });
+            // });
+
+            gui.add(params, 'altitude', 0, 200).onChange(function () {
+                meshes.forEach(function (mesh) {
+                    mesh.setAltitude(params.altitude);
+                });
+            });
+        }
+
+
+
+
+
+        var OPTIONS = {
+            altitude: 0,
+            speed: 0.01,
+            height: 100
+        };
+
+        class ArcLine extends BaseObject {
+            constructor(lineString, options, material, layer) {
+                super();
+                options.offset = material.uniforms.offset.value;
+                options.clock = new THREE.Clock();
+                //geoutil.js getLinePosition
+                options = maptalks.Util.extend({}, OPTIONS, options, { layer, lineString });
+                this._initOptions(options);
+
+                const { altitude, height } = options;
+                const points = getArcPoints(lineString, layer.distanceToVector3(height, height).x, layer);
+                const geometry = new THREE.Geometry();
+                geometry.vertices = points;
+                const meshLine = new MeshLine();
+                meshLine.setGeometry(geometry);
+
+                const map = layer.getMap();
+                const size = map.getSize();
+
+                material.uniforms.resolution.value.set(size.width, size.height);
+
+                this._createMesh(meshLine.geometry, material);
+
+                const z = layer.distanceToVector3(altitude, altitude).x;
+                const center = lineString.getCenter();
+                const v = layer.coordinateToVector3(center, z);
+                this.getObject3d().position.copy(v);
+                this._setPickObject3d();
+                this._init();
+            }
+            
+            _animation() {
+                this.options.offset.x -= this.options.speed * this.options.clock.getDelta();
+            }
+
+            _init() {
+                const pick = this.getLayer().getPick();
+                this.on('add', () => {
+                    pick.add(this.pickObject3d);
+                });
+                this.on('remove', () => {
+                    pick.remove(this.pickObject3d);
+                });
+            }
+
+
+            _setPickObject3d(ps, linewidth) {
+                const geometry = this.getObject3d().geometry.clone();
+                const pick = this.getLayer().getPick();
+                const color = pick.getColor();
+                const {
+                    lineWidth,
+                    sizeAttenuation,
+                    transparent,
+                    near,
+                    far
+                } = this.getObject3d().material;
+                const material = new MeshLineMaterial({
+                    lineWidth,
+                    sizeAttenuation,
+                    transparent,
+                    near,
+                    far,
+                    color
+                });
+                const map = this.getMap();
+                const size = map.getSize();
+
+                material.uniforms.resolution.value.set(size.width, size.height);
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.copy(this.getObject3d().position);
+
+                const colorIndex = color.getHex();
+                mesh._colorIndex = colorIndex;
+                this.setPickObject3d(mesh);
+            }
+
+            identify(coordinate) {
+                return this.picked;
+            }
+        }
+
+        function getArcPoints(lineString, height, layer) {
+            const lnglats = [];
+            if (Array.isArray(lineString)) {
+                lnglats.push(lineString[0], lineString[lineString.length - 1]);
+            } else if (lineString instanceof maptalks.LineString) {
+                const coordinates = lineString.getCoordinates();
+                lnglats.push(coordinates[0], coordinates[coordinates.length - 1]);
+            }
+            const [first, last] = lnglats;
+            let center;
+            if (Array.isArray(first)) {
+                center = [first[0] / 2 + last[0] / 2, first[1] / 2 + last[1] / 2];
+            } else if (first instanceof maptalks.Coordinate) {
+                center = [first.x / 2 + last.x / 2, first.y / 2 + last.y / 2];
+            }
+            const centerPt = layer.coordinateToVector3(lineString.getCenter());
+            const v = layer.coordinateToVector3(first).sub(centerPt);
+            const v1 = layer.coordinateToVector3(last).sub(centerPt);
+            const vh = layer.coordinateToVector3(center, height).sub(centerPt);
+            const ellipse = new THREE.CatmullRomCurve3([v, vh, v1], false, 'catmullrom');
+            const points = ellipse.getPoints(40);
+            return points;
+        }       
+  }
+
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+#map {
+  height: 100vh;
+  width: 100ww;
+  background-color: #000;
+}
+</style>
