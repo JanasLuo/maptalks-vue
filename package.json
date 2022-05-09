@@ -11,9 +11,12 @@
     "@maptalks/gl": "^0.67.10",
     "@maptalks/vt": "^0.63.11",
     "core-js": "^3.6.5",
-    "maptalks": "^1.0.0-beta.9",
+    "deck.gl": "^8.7.8",
+    "maptalks": "^1.0.0-rc.4",
+    "maptalks-deckgllayer": "^0.0.1",
     "maptalks.three": "^0.23.0",
     "proj4": "^2.8.0",
+    "react": "^18.1.0",
     "three": "^0.123.0",
     "three.meshline": "^1.4.0",
     "vue": "^3.0.0"
